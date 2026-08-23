@@ -38,7 +38,7 @@ export default function Hero() {
         animate={{ opacity: 0.6, scale: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/CAP.png')" }}
+        style={{ backgroundImage: "url('/wallpaper.jpg')" }}
       ></motion.div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/80 via-transparent to-black/90 pointer-events-none"></div>
 
