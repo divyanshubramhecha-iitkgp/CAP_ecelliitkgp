@@ -36,9 +36,12 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-6 relative overflow-hidden flex items-center justify-center bg-[url('/form_background.jpg')] bg-cover bg-center bg-no-repeat bg-fixed">
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
+    <main className="min-h-screen pt-24 pb-16 px-6 relative overflow-hidden flex items-center justify-center">
+      {/* Background Image with Blur */}
+      <div className="absolute inset-0 bg-[url('/submit-to-dom.webp')] bg-cover bg-center bg-no-repeat bg-fixed blur-[5px] scale-105"></div>
+      
+      {/* 2% White Overlay */}
+      <div className="absolute inset-0 bg-white/[0.02] pointer-events-none"></div>
 
       {/* Background Decorative Elements */}
       <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-emerald-900/40 rounded-full blur-[100px] pointer-events-none"></div>

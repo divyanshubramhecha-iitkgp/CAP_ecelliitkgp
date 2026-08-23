@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 type StoryPhase = {
@@ -40,7 +40,7 @@ const storyPhases: StoryPhase[] = [
   }
 ];
 
-const TOTAL_FRAMES = 100;
+const TOTAL_FRAMES = 45;
 
 export default function AboutStats() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -49,10 +49,7 @@ export default function AboutStats() {
   const [activePhaseIndex, setActivePhaseIndex] = useState<number>(0);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  // Removed useScroll, calculating progress manually for perfect accuracy
 
   // Preload 100 high-FPS video sequence frames for 60FPS video scrubbing
   useEffect(() => {
@@ -75,7 +72,15 @@ export default function AboutStats() {
     let lastPhase = -1;
 
     const render = () => {
-      const progress = scrollYProgress.get();
+      let progress = 0;
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const totalScroll = rect.height - window.innerHeight;
+        if (totalScroll > 0) {
+          progress = Math.max(0, Math.min(1, -rect.top / totalScroll));
+        }
+      }
+
       const targetFrame = Math.min(TOTAL_FRAMES - 1, Math.max(0, progress * (TOTAL_FRAMES - 1)));
 
       // Linear interpolation (Lerp) for high-precision 60FPS video playback
@@ -97,11 +102,11 @@ export default function AboutStats() {
         }
       }
 
-      // Update story text phase based on specific frame numbers
+      // Update story text phase based on specific frame numbers (0-44)
       let nextPhase = 0;
-      if (frameIdx < 33) {
+      if (frameIdx < 15) {
         nextPhase = 0;
-      } else if (frameIdx < 67) {
+      } else if (frameIdx < 30) {
         nextPhase = 1;
       } else {
         nextPhase = 2;
@@ -118,7 +123,7 @@ export default function AboutStats() {
 
     animId = requestAnimationFrame(render);
     return () => cancelAnimationFrame(animId);
-  }, [scrollYProgress]);
+  }, []);
 
   const currentPhase = storyPhases[activePhaseIndex];
 
@@ -251,7 +256,7 @@ export default function AboutStats() {
 
           {/* Bottom Video Scroll Scrub Indicator */}
           <div className="flex items-center justify-between text-slate-400 font-mono text-xs pt-4 border-t border-slate-900">
-            <span>100-FRAME VIDEO SCRUB (60 FPS)</span>
+            <span>45-FRAME VIDEO SCRUB (60 FPS)</span>
             <div className="flex items-center gap-2 text-emerald-400">
               <span className="uppercase tracking-widest">{currentPhase.title}</span>
               <ArrowRight className="w-4 h-4 animate-pulse" />

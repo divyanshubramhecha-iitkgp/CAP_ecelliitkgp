@@ -9,16 +9,16 @@ import Footer from "@/components/Footer";
 const team = [
     {
         name: "CHAITANYA GHUGE",
-        role: "EAD-LSM COORDINATOR AND PUBLIC RELATIONS",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMdFlNqyv0iRquYx4RAQ1KhUXfcUFkUAzIqNxXfvGpQ&s=10",
+        role: "PUBLIC RELATIONS AND EAD-LSM COORDINATOR",
+        image: "/chaitanya.png",
         email: "chaitanya@ecell.in",
         phone: "+91 76888 42669",
         linkedin: "https://www.linkedin.com/in/chaitanya-ghuge-246a9b39b/"
     },
     {
         name: "RITESH THOSARE",
-        role: "CORPORATE AND MEDIA RELATIONS AND PUBLIC RELATIONS",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLQs0bTf6S0x5raSe5nx4rVshC9d4yYLZcmEIUMb6q03icVD84GJ9WqHk&s=10",
+        role: "PUBLIC RELATIONS, CORPORATE AND MEDIA RELATIONS",
+        image: "/ritesh.jpeg",
         email: "ritesh@ecell.in",
         phone: "+91 90754 57648",
         linkedin: "https://www.linkedin.com/in/ritesh-thosare-36a278321/"

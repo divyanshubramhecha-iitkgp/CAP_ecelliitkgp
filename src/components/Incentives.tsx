@@ -105,12 +105,14 @@ export default function Incentives() {
                 viewBox="0 0 200 800" 
                 className="absolute left-0 top-1/2 -translate-y-1/2 w-[200px] h-[800px] overflow-visible"
               >
+                {/* SVG Arc for R=500. A 500 500 0 0 1 defines a circular arc */}
                 <path 
-                  d="M -50 0 C 150 200, 150 600, -50 800" 
+                  d="M 20 50 A 500 500 0 0 1 20 750" 
                   fill="none" 
-                  stroke="rgba(16, 185, 129, 0.2)" 
-                  strokeWidth="2"
-                  strokeDasharray="4 8"
+                  stroke="rgba(16, 185, 129, 0.35)" 
+                  strokeWidth="3"
+                  strokeDasharray="0 12"
+                  strokeLinecap="round"
                 />
               </svg>
 
@@ -123,8 +125,8 @@ export default function Incentives() {
                   // Arc positioning logic 
                   const angle = (index - activeIndex) * 30; // degrees from center
                   const rad = angle * (Math.PI / 180);
-                  const radius = 350;
-                  const x = Math.cos(rad) * radius - radius + 80;
+                  const radius = 500;
+                  const x = Math.cos(rad) * radius - radius + 150;
                   const y = Math.sin(rad) * radius;
 
                   return (
@@ -155,12 +157,12 @@ export default function Incentives() {
           </div>
 
           {/* CENTER: Dynamic Text (One at a time) */}
-          <div className="w-full md:w-[75%] h-[400px] md:h-[500px] flex flex-col justify-center items-start z-20 relative px-4 lg:px-12 text-left">
-            <h2 className="text-xs md:text-sm font-semibold text-slate-400 uppercase tracking-[0.3em] absolute top-[53px] z-30">
+          <div className="w-full md:w-[75%] h-[400px] md:h-[500px] flex flex-col justify-center items-center z-20 relative px-4 lg:px-12 text-center md:-translate-x-10">
+            <h2 className="text-xs md:text-sm font-semibold text-slate-400 uppercase tracking-[0.3em] absolute top-[53px] left-1/2 -translate-x-1/2 w-full text-center z-30">
               INCENTIVES & BENEFITS
             </h2>
             
-            <div className="relative w-full h-full mt-24">
+            <div className="relative w-full h-full mt-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`text-${activePartner.id}`}
@@ -168,7 +170,7 @@ export default function Incentives() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="absolute inset-0 flex flex-col items-start justify-center gap-4 w-full max-w-full"
+                  className="absolute inset-0 flex flex-col items-center justify-start pt-20 md:pt-28 gap-4 w-full max-w-full"
                 >
                   <div className="px-4 py-1.5 border border-slate-800 rounded-full bg-slate-900/40">
                     <span className="text-[10px] md:text-xs font-medium uppercase text-emerald-500 tracking-[0.2em] truncate">
@@ -176,12 +178,12 @@ export default function Incentives() {
                     </span>
                   </div>
                   
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold font-serif text-white tracking-wide leading-tight max-w-3xl">
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold font-serif text-white tracking-wide leading-tight max-w-3xl text-center">
                     {activePartner.name}
                   </h3>
                   
                   <div className="max-w-2xl">
-                    <p className="text-slate-300 text-base md:text-lg lg:text-xl font-light leading-relaxed text-left">
+                    <p className="text-slate-300 text-base md:text-lg lg:text-xl font-light leading-relaxed text-center">
                       {activePartner.desc}
                     </p>
                   </div>

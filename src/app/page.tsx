@@ -50,9 +50,6 @@ export default function Home() {
       {!hasEntered && <IntroScreen onEnter={handleEnter} />}
 
       <div className={`transition-opacity duration-1000 ${hasEntered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-
-
-
         <SocialSidebar />
         <Hero />
         <AboutStats />
