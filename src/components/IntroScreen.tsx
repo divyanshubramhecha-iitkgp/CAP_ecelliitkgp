@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,6 +16,22 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
   const handleEnter = () => {
     setIsEntering(true);
   };
+
+  useEffect(() => {
+    if (isEntering) {
+      const timer = setTimeout(() => {
+        setShowLogo(true);
+        setTimeout(() => {
+          setIsExiting(true);
+          setTimeout(() => {
+            onEnter();
+          }, 3000);
+        }, 1000);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isEntering, onEnter]);
 
   return (
     <div
@@ -37,32 +53,10 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           {/* Black background for logo presentation */}
           <div className={`absolute inset-0 bg-black z-10 transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}></div>
           
-          <video
-            src="/cap_video_hero.mp4"
-            autoPlay
-            playsInline
-            className={`absolute top-1/2 left-1/2 w-[100vh] h-[100vw] object-cover z-20 -translate-x-1/2 -translate-y-1/2 -rotate-90 transition-opacity duration-1000 ${showLogo ? 'opacity-0' : 'opacity-100'}`}
-            ref={(el) => {
-              if (el) el.playbackRate = 1.65;
-            }}
-            onEnded={() => {
-              setShowLogo(true);
-              setTimeout(() => {
-                setIsExiting(true);
-                setTimeout(() => {
-                  onEnter();
-                }, 3000);
-              }, 1000);
-            }}
-            onError={() => {
-              setShowLogo(true);
-              setTimeout(() => {
-                setIsExiting(true);
-                setTimeout(() => {
-                  onEnter();
-                }, 3000);
-              }, 1000);
-            }}
+          <img
+            src="/CAP_1.png"
+            alt="Intro"
+            className={`absolute top-1/2 left-1/2 w-full h-full object-cover z-20 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-1000 ${showLogo ? 'opacity-0' : 'opacity-100'}`}
           />
           <AnimatePresence>
             {showLogo && (
